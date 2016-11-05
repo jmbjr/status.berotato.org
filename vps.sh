@@ -24,7 +24,7 @@ fi
 
 echo "$timeformat,$plottime,$year,$month,$day,$hour,$minute,$second,$DF,$RAM,$CPU1,$CPU5,$CPU15,$crawlers">>$csvfile
 
-python /home/crawl-dev/sizzell/vps/makeplot.py
+python /home/crawl-dev/sizzell/vps/cpu.py
 
 
 

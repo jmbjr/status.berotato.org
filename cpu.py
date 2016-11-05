@@ -21,16 +21,15 @@ data = data.rename(columns ={'timeformat':'Date', 'variable':'TimeRange', 'value
 retPlot = ggplot(data, aes('Date','CPU_Load',color='TimeRange')) \
   + geom_line(size=2.) \
   + geom_hline(yintercept=0, color='black', size=1.7, linetype='-.') \
-  + scale_y_continuous(labels='percent') \
-  + scale_x_date(labels='%b %d %y',breaks=date_breaks('week') ) \
+  + scale_y_continuous() \
+  + scale_x_date(labels='%b %d %y',breaks=date_breaks('1 day') ) \
   + theme_seaborn(style='whitegrid') \
-  + ggtitle(('%s CPU Load')) 
+  + ggtitle(('CPU Load')) 
 
 fig = retPlot.draw()
 ax = fig.axes[0]
 offbox = ax.artists[0]
 offbox.set_bbox_to_anchor((1, 0.5), ax.transAxes)
-
 
 ggsave(retPlot, "/home/crawl-dev/sizzell/vps/test1.png")
 

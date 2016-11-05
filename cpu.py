@@ -22,15 +22,28 @@ retPlot = ggplot(data, aes('Date','CPU_Load',color='TimeRange')) \
   + geom_line(size=2.) \
   + geom_hline(yintercept=0, color='black', size=1.7, linetype='-.') \
   + scale_y_continuous() \
-  + scale_x_date(labels='%b %d %y',breaks=date_breaks('1 day') ) \
+  + scale_x_date(labels='%m/%d %H:%M',breaks=date_breaks('1 hour') ) \
   + theme_seaborn(style='whitegrid') \
-  + ggtitle(('CPU Load')) 
+  + ggtitle(('CPU Load')) \
 
 fig = retPlot.draw()
 ax = fig.axes[0]
 offbox = ax.artists[0]
 offbox.set_bbox_to_anchor((1, 0.5), ax.transAxes)
 
-ggsave(plot=retPlot, filename="/home/crawl-dev/sizzell/vps/test1.png", dpi=100)
+ggsave(plot=retPlot, filename="/home/crawl-dev/sizzell/vps/cpu-actual.png", dpi=100)
 
+retPlot = ggplot(data, aes('Date','CPU_Load',color='TimeRange')) \
+  + geom_hline(yintercept=0, color='black', size=1.7, linetype='-.') \
+  + scale_y_continuous() \
+  + scale_x_date(labels='%m/%d %H:%M',breaks=date_breaks('1 hour') ) \
+  + theme_seaborn(style='whitegrid') \
+  + ggtitle(('CPU Load')) \
+  + stat_smooth(span=0.2)
 
+fig = retPlot.draw()
+ax = fig.axes[0]
+offbox = ax.artists[0]
+offbox.set_bbox_to_anchor((1, 0.5), ax.transAxes)
+
+ggsave(plot=retPlot, filename="/home/crawl-dev/sizzell/vps/cpu-smooth.png", dpi=100)

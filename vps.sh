@@ -1,6 +1,7 @@
 #!/bin/sh
 csvfile=/home/crawl-dev/sizzell/vps/data.csv
 
+crawlers=`/home/crawl-dev/sizzell/numplayers`
 DF=`df |head -2 |awk '{print $5}' |tail -1|sed 's/\%//g'|sed 's/^/./g'`
 RAM=`free -m | head -2|tail -1|awk '{print int($3 / ($3 + $4) * 100), "%" }'|sed 's/ //g'|sed 's/\%//g'|sed 's/^/./g'`
 CPU1=`uptime|awk '{print $10}'|sed 's/,//g'`
@@ -18,10 +19,10 @@ plottime=$((day*24*60*60 + hour*60*60 + minute*60 + second))
 
 numlines=`cat $csvfile |wc -l`
 if [ ${numlines} -le "0" ];then
-  echo "timeformat,plottime,year,month,day,hour,minute,second,disk,ram,cpu1,cpu5,cpu15">$csvfile
+  echo "timeformat,plottime,year,month,day,hour,minute,second,disk,ram,cpu1,cpu5,cpu15,crawlers">$csvfile
 fi
 
-echo "$timeformat,$plottime,$year,$month,$day,$hour,$minute,$second,$DF,$RAM,$CPU1,$CPU5,$CPU15">>$csvfile
+echo "$timeformat,$plottime,$year,$month,$day,$hour,$minute,$second,$DF,$RAM,$CPU1,$CPU5,$CPU15,$crawlers">>$csvfile
 
 python /home/crawl-dev/sizzell/vps/makeplot.py
 

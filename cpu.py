@@ -8,7 +8,7 @@ def dateConvert(df):
   return df
 
 df = pd.read_csv("/home/crawl-dev/sizzell/vps/data.csv")
-df = df[['timeformat','cpu1','cpu5','cpu15']]
+df = df[['timeformat','cpu01','cpu05','cpu15']]
 
 timerange=df.iloc[0]
 df = df[1:]

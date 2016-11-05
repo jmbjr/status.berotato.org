@@ -31,6 +31,6 @@ ax = fig.axes[0]
 offbox = ax.artists[0]
 offbox.set_bbox_to_anchor((1, 0.5), ax.transAxes)
 
-ggsave(retPlot, "/home/crawl-dev/sizzell/vps/test1.png")
+ggsave(plot=retPlot, filename="/home/crawl-dev/sizzell/vps/test1.png", dpi=100)
 
 
